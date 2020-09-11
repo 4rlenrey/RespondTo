@@ -1,82 +1,79 @@
-#LearnYourBot by 4rlenrey
+#RespondTo by 4rlenrey
 
 import json
-import os
 import random
 
 #load json file
-file = open("data.json", 'r')
-data = json.load(file)
+FILE = open("data.json", 'r')
+DATA = json.load(FILE)
 
 #get Message-type from known types in json
 def gettype(message):
-    Types = data["Type"]
-    OptionsT = len(Types)
-    for i in range(OptionsT):
-        Type = data[Types[i]]
-        Options = len(Type)
-        for j in range(Options):
-            messageTested = Type[j]
-            if messageTested == message:
-                return Types[i]
+    types = DATA["Type"]
+    options_t = len(types)
+    for i in range(options_t):
+        msg_type = DATA[types[i]]
+        options = len(msg_type)
+        for j in range(options):
+            message_tested = msg_type[j]
+            if message_tested == message:
+                return types[i]
     return "unknown"
 
 #Take care of input text
-def handleInput():
-    Recived = input("Message: ")
-    if Recived == "quit":
-        print("Exit")
+def handle_input():
+    recived = input("Message: ")
+    if recived == "quit":
         exit()
-    Recivedtype = gettype(Recived)
+    recived_type = gettype(recived)
     try:
-        addtotypef(Recivedtype, Recived)
+        addtotypef(recived_type, recived)
     except:
-        print("No response type for ", Recivedtype)
+        print("No response type for ", recived_type)
 
 #Add message to existing message_type
-def addtotypef(Recivedtype, Recived):
-    if Recivedtype == "unknown":
-        print("To wich type do you want to add this word?")
-        print(json.dumps(data["Type"]))
-        addtoType = input()
-        if addtoType in data["Type"]:
-            print("adding to ", addtoType)
-            data[addtoType].append(Recived)
-            fileWrite = open("data.json", mode='w')
-            fileWrite.write(json.dumps(data, indent=2))
-            fileWrite.close()
+def addtotypef(recived_type, recived):
+    if recived_type == "unknown":
+        print("To wich type do you want to add this word? \n", json.dumps(DATA["Type"]))
+        add_to_type = input()
+        if add_to_type in DATA["Type"]:
+            print("adding to ", add_to_type)
+            DATA[add_to_type].append(recived)
+            file_write = open("data.json", mode='w')
+            file_write.write(json.dumps(DATA, indent=2))
+            file_write.close()
         else:
             print("Type does not exist")
-            addNewType(Recived, addtoType)
+            add_new_type(recived, add_to_type)
     else:
-        respond(Recivedtype)
+        respond(recived_type)
 
 #Add new message-type to JSON
-def addNewType(Recived, addtoType):
-    print("Creating new type", addtoType)
-    list = []
-    list.append(Recived)
-    data[addtoType] = list
-    data["Type"].append(addtoType)
-    fileWrite = open("data.json", mode='w')
-    fileWrite.write(json.dumps(data, indent=2))
-    fileWrite.close()
+def add_new_type(recived, add_to_type):
+    print("Creating new type", add_to_type)
+    list_r = []
+    list_r.append(recived)
+    DATA[add_to_type] = list_r
+    DATA["Type"].append(add_to_type)
+    file_write = open("data.json", mode='w')
+    file_write.write(json.dumps(DATA, indent=2))
+    file_write.close()
 
 #Get response type for specific message
-def getresponsetype(Recivedtype):
-    list = data["Response"]
-    response_type = list[Recivedtype]
+def getresponsetype(recived_type):
+    list_r = DATA["Response"]
+    response_type = list_r[recived_type]
     return response_type
 
 #Print response
-def respond(Recivedtype):
-    response_type = getresponsetype(Recivedtype)
-    response = data[response_type]
+def respond(recived_type):
+    response_type = getresponsetype(recived_type)
+    response = DATA[response_type]
     print(random.choice(response))
 
 def train():
     while True:
         #Just handle console messages for now
-        handleInput()
+        handle_input()
 
 train()
