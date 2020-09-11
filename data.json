@@ -1,0 +1,17 @@
+{
+  "Response": {
+    "welcome": "welcome"
+  },
+  "Type": [
+    "welcome",
+    "goodbye"
+  ],
+  "welcome": [
+    "Hey",
+    "Hello",
+    "hello"
+  ],
+  "goodbye": [
+    "Goodbye"
+  ]
+}
