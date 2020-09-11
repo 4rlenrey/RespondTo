@@ -29,7 +29,7 @@ def handle_input():
     try:
         addtotypef(recived_type, recived)
     except:
-        print("No response type for ", recived_type)
+        pass
 
 #Add message to existing message_type
 def addtotypef(recived_type, recived):
@@ -60,14 +60,23 @@ def add_new_type(recived, add_to_type):
     file_write.close()
 
 #Get response type for specific message
-def getresponsetype(recived_type):
+def get_response_type(recived_type):
     list_r = DATA["Response"]
-    response_type = list_r[recived_type]
-    return response_type
+    try:
+        response_type = list_r[recived_type]
+        return response_type
+    except:
+        add_type_qu = input("Do you want to add responsetype for this word? (Y/N)")
+        if add_type_qu == "Y":
+            match_response_type(recived_type)
+            return response_type
+        else:
+            pass
+    
 
 #Print response
 def respond(recived_type):
-    response_type = getresponsetype(recived_type)
+    response_type = get_response_type(recived_type)
     response = DATA[response_type]
     print(random.choice(response))
 
@@ -75,5 +84,15 @@ def train():
     while True:
         #Just handle console messages for now
         handle_input()
+
+#add new response type for message
+def match_response_type(message_type):
+    print(json.dumps(DATA["Type"]))
+    response_type = input("Which type should be a response type for: ")
+    DATA["Response"][message_type] = response_type
+    print(DATA["Response"])
+    file_write = open("data.json", mode='w')
+    file_write.write(json.dumps(DATA, indent=2))
+    file_write.close()
 
 train()

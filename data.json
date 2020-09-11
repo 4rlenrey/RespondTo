@@ -1,17 +1,31 @@
 {
   "Response": {
-    "welcome": "welcome"
+    "welcome": "welcome",
+    "goodbye": "goodbye",
+    "sup": "a_sup"
   },
   "Type": [
     "welcome",
-    "goodbye"
+    "goodbye",
+    "sup",
+    "a_sup"
   ],
   "welcome": [
     "Hey",
     "Hello",
-    "hello"
+    "hello",
+    "hey"
   ],
   "goodbye": [
-    "Goodbye"
+    "Goodbye",
+    "bye"
+  ],
+  "sup": [
+    "what's up",
+    "how r u",
+    "how r u "
+  ],
+  "a_sup": [
+    "im good"
   ]
 }
