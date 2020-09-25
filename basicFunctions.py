@@ -21,21 +21,18 @@ def gettype(message):
     return "unknown"
 
 #Take care of input text
-def handle_input():
-    recived = input("Message: ")
+def handle_input(recived):
     if recived == "quit":
         exit()
     recived_type = gettype(recived)
     try:
-        addtotypef(recived_type, recived)
+        addtotypef(recived_type, recived, "TODO")
     except:
         pass
 
 #Add message to existing message_type
-def addtotypef(recived_type, recived):
+def addtotypef(recived_type, recived, add_to_type):
     if recived_type == "unknown":
-        print("To wich type do you want to add this word? \n", json.dumps(DATA["Type"]))
-        add_to_type = input()
         if add_to_type in DATA["Type"]:
             print("adding to ", add_to_type)
             DATA[add_to_type].append(recived)
@@ -66,13 +63,8 @@ def get_response_type(recived_type):
         response_type = list_r[recived_type]
         return response_type
     except:
-        add_type_qu = input("Do you want to add responsetype for this word? (Y/N)")
-        if add_type_qu == "Y":
-            match_response_type(recived_type)
-            return response_type
-        else:
-            pass
-    
+        return "unknown"
+        
 
 #Print response
 def respond(recived_type):
@@ -83,16 +75,16 @@ def respond(recived_type):
 def train():
     while True:
         #Just handle console messages for now
-        handle_input()
+        recived = input("Message: ")
+        handle_input(recived)
 
 #add new response type for message
-def match_response_type(message_type):
-    print(json.dumps(DATA["Type"]))
-    response_type = input("Which type should be a response type for: ")
+def match_response_type(message_type, response_type):
     DATA["Response"][message_type] = response_type
     print(DATA["Response"])
     file_write = open("data.json", mode='w')
     file_write.write(json.dumps(DATA, indent=2))
     file_write.close()
 
-train()
+if __name__ == "__main__":
+    train()

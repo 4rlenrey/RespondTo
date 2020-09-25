@@ -2,19 +2,29 @@
   "Response": {
     "welcome": "welcome",
     "goodbye": "goodbye",
-    "sup": "a_sup"
+    "sup": "a_sup",
+    "time_q": "time",
+    "Ok": "Ok",
+    "nameQ": "name"
   },
   "Type": [
     "welcome",
     "goodbye",
     "sup",
-    "a_sup"
+    "a_sup",
+    "time_q",
+    "time",
+    "Ok",
+    "name",
+    "nameQ"
   ],
   "welcome": [
     "Hey",
     "Hello",
     "hello",
-    "hey"
+    "hey",
+    "Helloo",
+    "Heyyyy"
   ],
   "goodbye": [
     "Goodbye",
@@ -23,9 +33,27 @@
   "sup": [
     "what's up",
     "how r u",
-    "how r u "
+    "how r u ",
+    "how are you"
   ],
   "a_sup": [
     "im good"
+  ],
+  "time_q": [
+    "What's the time?",
+    "what's the time"
+  ],
+  "time": [
+    "It's 19"
+  ],
+  "Ok": [
+    "Ok",
+    "k"
+  ],
+  "name": [
+    "4rlenrey"
+  ],
+  "nameQ": [
+    "What's your name?"
   ]
 }
