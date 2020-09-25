@@ -70,7 +70,7 @@ def get_response_type(recived_type):
 def respond(recived_type):
     response_type = get_response_type(recived_type)
     response = DATA[response_type]
-    print(random.choice(response))
+    return(random.choice(response))
 
 def train():
     while True:
