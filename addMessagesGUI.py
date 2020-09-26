@@ -32,16 +32,15 @@ class addMessagesGUI:
         rem = self.reMessage.get()
         typetor = gettype(rem)
         typer = get_response_type(typetor) 
-        if typer in get_type_list():
-            x = respond(typer)
-            print(x)
+        if typer != "unknown":
+            x = respond(typetor)
             self.relab.configure(text = x)
 
     def __init__(self, master):
         self.master = master
         master.title("RespondTo")
         master.geometry("700x300")
-        
+
         responseRow = int(8) #row for response
         self.responseLabel = tk.Label(master, text="GET RESPONSE")
         self.responseLabel.grid(row=responseRow-1, columnspan = 2, sticky="W")

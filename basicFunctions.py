@@ -27,7 +27,6 @@ def addtotypef(recived_type, recived, add_to_type):
     DATA = json.load(FILE)
     if recived_type == "unknown":
         if add_to_type in DATA["Type"]:
-            print("adding to ", add_to_type)
             DATA[add_to_type].append(recived)
             file_write = open("data.json", mode='w')
             file_write.write(json.dumps(DATA, indent=2))
@@ -42,7 +41,6 @@ def addtotypef(recived_type, recived, add_to_type):
 def add_new_type(recived, add_to_type):
     FILE = open("data.json", 'r')
     DATA = json.load(FILE)
-    print("Creating new type", add_to_type)
     list_r = []
     list_r.append(recived)
     DATA[add_to_type] = list_r
