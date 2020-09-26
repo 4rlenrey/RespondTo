@@ -7,104 +7,87 @@ import json
 from basicFunctions import gettype, get_response_type, addtotypef, match_response_type, add_new_type, respond
 import random
 
-FILE = open("data.json", 'r')
-DATA = json.load(FILE)
+def get_type_list():
+    FILE = open("data.json", 'r')
+    DATA = json.load(FILE)
+    FILE.close()
+    return DATA["Type"]
 
-def handleClickType():
-    type1 = listOfTypes1.get()
-    type2 = listOfTypes2.get()
-    if type1 in DATA["Type"] and type2 in DATA["Type"]:
-        match_response_type(type1, type2)
+class addMessagesGUI:
+    def handleClickType(self):
+        type1 = self.listOfTypes1.get()
+        type2 = self.listOfTypes2.get()
+        if type1 in get_type_list() and type2 in get_type_list():
+            match_response_type(type1, type2)
 
+    def handleClickWord(self):
+        text = self.inputMessage.get()
+        type = self.listOfcat.get()
+        if gettype(text) == type:
+            pass
+        elif gettype(text) == "unknown" and type != "":
+            addtotypef(gettype(text), text, type)
 
-def handleClickWord():
-    text = inputMessage.get()
-    type = listOfcat.get()
-    if gettype(text) == type:
-        pass
-    elif gettype(text) == "unknown" and type != "":
-        addtotypef(gettype(text), text, type)
+    def getResponse(self):
+        rem = self.reMessage.get()
+        typetor = gettype(rem)
+        typer = get_response_type(typetor) 
+        if typer in get_type_list():
+            x = respond(typer)
+            print(x)
+            self.relab.configure(text = x)
 
-def getResponse():
-    rem = reMessage.get()
-    typetor = gettype(rem)
-    typer = get_response_type(typetor) 
-    if typer in DATA["Type"]:
-        x = respond(typer)
-        print(x)
-        relab.configure(text = x)
-
-
-window = tk.Tk()
-
-responseRow = int(8) #row for response
-
-responseLabel = tk.Label(window, text="GET RESPONSE")
-responseLabel.grid(row=responseRow-1, columnspan = 2, sticky="W")
-
-responselab = tk.Label(window, text="Message:")
-responselab.grid(column=0, row=responseRow)
-
-reMessage = tk.Entry(window)
-reMessage.grid(column=1, row=responseRow)
-
-relab = tk.Label(window, text="Response:")
-relab.grid(column=2, row=responseRow)
-
-relab = tk.Label(window, text="")
-relab.grid(column=3, row=responseRow)
-
-typeButton = tk.Button(window, text="Enter", command = getResponse, width=20)
-typeButton.grid(column=4, row=responseRow)
-
-
-matchTypeRow = int(6) #row for matching types
-
-matchTypeLabel = tk.Label(window, text="MATCH TYPES")
-matchTypeLabel.grid(row=matchTypeRow-1, columnspan = 2, sticky="W")
-
-Type1lab = tk.Label(window, text="Type 1:")
-Type1lab.grid(column=0, row=matchTypeRow)
-
-listOfTypes1 = ttk.Combobox(window)
-listOfTypes1['values'] = DATA["Type"]
-listOfTypes1.grid(column=1, row = matchTypeRow)
-
-Type2lab = tk.Label(window, text="Type 2:")
-Type2lab.grid(column=2, row=matchTypeRow)
-
-listOfTypes2 = ttk.Combobox(window)
-listOfTypes2['values'] = DATA["Type"]
-listOfTypes2.grid(column=3, row = matchTypeRow)
-
-typeButton = tk.Button(window, text="Enter", command = handleClickType, width=20)
-typeButton.grid(column=4, row=matchTypeRow)
+    def __init__(self, master):
+        self.master = master
+        master.title("RespondTo")
+        master.geometry("700x300")
+        
+        responseRow = int(8) #row for response
+        self.responseLabel = tk.Label(master, text="GET RESPONSE")
+        self.responseLabel.grid(row=responseRow-1, columnspan = 2, sticky="W")
+        self.responselab = tk.Label(master, text="Message:")
+        self.responselab.grid(column=0, row=responseRow)
+        self.reMessage = tk.Entry(master)
+        self.reMessage.grid(column=1, row=responseRow)
+        self.relab = tk.Label(master, text="Response:")
+        self.relab.grid(column=2, row=responseRow)
+        self.relab = tk.Label(master, text="")
+        self.relab.grid(column=3, row=responseRow)
+        self.typeButton = tk.Button(master, text="Enter", command = self.getResponse, width=20)
+        self.typeButton.grid(column=4, row=responseRow)
 
 
+        matchTypeRow = int(6) #row for matching types
+        self.matchTypeLabel = tk.Label(master, text="MATCH TYPES")
+        self.matchTypeLabel.grid(row=matchTypeRow-1, columnspan = 2, sticky="W")
+        self.Type1lab = tk.Label(master, text="Type 1:")
+        self.Type1lab.grid(column=0, row=matchTypeRow)
+        self.listOfTypes1 = ttk.Combobox(master)
+        self.listOfTypes1['values'] = get_type_list()
+        self.listOfTypes1.grid(column=1, row = matchTypeRow)
+        self.Type2lab = tk.Label(master, text="Type 2:")
+        self.Type2lab.grid(column=2, row=matchTypeRow)
+        self.listOfTypes2 = ttk.Combobox(master)
+        self.listOfTypes2['values'] = get_type_list()
+        self.listOfTypes2.grid(column=3, row = matchTypeRow)
+        self.typeButton = tk.Button(master, text="Enter", command = self.handleClickType, width=20)
+        self.typeButton.grid(column=4, row=matchTypeRow)
 
-addMessageRow = int(4) #row for adding message
+        addMessageRow = int(4) #row for adding message
+        self.addMsgLabel = tk.Label(master, text="ADD NEW MESSAGE")
+        self.addMsgLabel.grid(row=addMessageRow-1, columnspan = 2, sticky="W")
+        self.inMsgLabel = tk.Label(master, text="Message:")
+        self.inMsgLabel.grid(column=0, row=addMessageRow)
+        self.inputMessage = tk.Entry(master)
+        self.inputMessage.grid(column=1, row=addMessageRow)
+        self.inMsgLabel = tk.Label(master, text="Type:")
+        self.inMsgLabel.grid(column=2, row=addMessageRow)
+        self.listOfcat = ttk.Combobox(master)
+        self.listOfcat['values'] = get_type_list()
+        self.listOfcat.grid(column=3, row = addMessageRow)
+        self.inMsgButton = tk.Button(master, text="Enter", command = self.handleClickWord, width=20)
+        self.inMsgButton.grid(column=4, row=addMessageRow)  
 
-addMsgLabel = tk.Label(window, text="ADD NEW MESSAGE")
-addMsgLabel.grid(row=addMessageRow-1, columnspan = 2, sticky="W")
-
-inMsgLabel = tk.Label(window, text="Message:")
-inMsgLabel.grid(column=0, row=addMessageRow)
-
-inputMessage = tk.Entry(window)
-inputMessage.grid(column=1, row=addMessageRow)
-
-inMsgLabel = tk.Label(window, text="Type:")
-inMsgLabel.grid(column=2, row=addMessageRow)
-
-listOfcat = ttk.Combobox(window)
-listOfcat['values'] = DATA["Type"]
-listOfcat.grid(column=3, row = addMessageRow)
-
-inMsgButton = tk.Button(window, text="Enter", command = handleClickWord, width=20)
-inMsgButton.grid(column=4, row=addMessageRow)
-
-
-window.geometry("700x300")
-window.title("RespondTo")
-
-window.mainloop()
+ROOT = tk.Tk()
+GUI = addMessagesGUI(ROOT)
+ROOT.mainloop()
