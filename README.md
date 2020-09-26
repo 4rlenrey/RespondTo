@@ -1,7 +1,7 @@
 <p align="center">
     Categorize your messages in JSON
     <br />
-    <a href="https://github.com/4rlenrey/RespondTo/blob/master/main.py"><strong>Check code »</strong></a>
+    <a href="https://github.com/4rlenrey/RespondTo/blob/gui/basicFunctions.py"><strong>Check code »</strong></a>
     <br />
     <br />
     <a href="https://github.com/4rlenrey/RespondTo/issues">Report Bug</a>
@@ -13,12 +13,20 @@
 
 * [About the Program](#About-The-Program)
 * [Using](#Using)
-* [ToDo](#ToDo)
+* [Requirements](#Requirements)
 
 ## About The Program
-This is a program "template" that categorizes messages and looks for appropriate responses.
+This program let you categorize messages and look for appropriate responses.
 
 All data is stored and categorized in `data.json`
+
+![Screenshot](/Screenshots/Screenshot)
+
+## Requirements
+```sh
+python3
+tkinter
+```
 
 ## Using
 
@@ -28,9 +36,7 @@ git clone https://github.com/4rlenrey/RespondTo.git
 ```
 2. Run 
 ```sh
-python3 main.py
+python3 addMessagesGUI.py
 ```
 
-## ToDo
-1. GUI
-2. Option for network of answers connected by response not by type
+
