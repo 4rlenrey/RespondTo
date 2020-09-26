@@ -1,7 +1,7 @@
 <p align="center">
     Categorize your messages in JSON
     <br />
-    <a href="https://github.com/4rlenrey/RespondTo/blob/master/main.py"><strong>Check code »</strong></a>
+    <a href="https://github.com/4rlenrey/RespondTo/blob/gui/basicFunctions.py"><strong>Check code »</strong></a>
     <br />
     <br />
     <a href="https://github.com/4rlenrey/RespondTo/issues">Report Bug</a>
