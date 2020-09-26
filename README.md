@@ -13,12 +13,20 @@
 
 * [About the Program](#About-The-Program)
 * [Using](#Using)
-* [ToDo](#ToDo)
+* [Requirements](#Requirements)
 
 ## About The Program
-This is a program "template" that categorizes messages and looks for appropriate responses.
+This program let you categorize messages and look for appropriate responses.
 
 All data is stored and categorized in `data.json`
+
+![Screenshot](/Screenshots/Screenshot)
+
+## Requirements
+```sh
+python3
+tkinter
+```
 
 ## Using
 
@@ -31,6 +39,4 @@ git clone https://github.com/4rlenrey/RespondTo.git
 python3 main.py
 ```
 
-## ToDo
-1. GUI
-2. Option for network of answers connected by response not by type
+
