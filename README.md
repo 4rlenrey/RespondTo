@@ -36,7 +36,7 @@ git clone https://github.com/4rlenrey/RespondTo.git
 ```
 2. Run 
 ```sh
-python3 main.py
+python3 addMessagesGUI.py
 ```
 
 

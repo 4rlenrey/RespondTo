@@ -85,7 +85,10 @@ class add_messages_GUI:
         self.listOfcat.grid(column=3, row=addMessageRow)
         self.inMsgButton = tk.Button(master, text="Enter", command=self.handleClickWord, width=20)
         self.inMsgButton.grid(column=4, row=addMessageRow)
+def main():
+    ROOT = tk.Tk()
+    GUI = add_messages_GUI(ROOT)
+    ROOT.mainloop()
 
-ROOT = tk.Tk()
-GUI = add_messages_GUI(ROOT)
-ROOT.mainloop()
+if __name__ == "__main__":
+    main()
